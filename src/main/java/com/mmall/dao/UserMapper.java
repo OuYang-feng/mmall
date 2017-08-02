@@ -19,6 +19,16 @@ public interface UserMapper {
     int checkUserName(String username);
 
     int checkEmail(String eamil);
+    //多个参数传入需要指定参数
+    User selectLogin( @Param("username") String username, @Param("password") String password);
 
-    User selectLogin( String username, String password);
+    String selectQuestionByUsername(String username);
+
+    int checkAnswer(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
+
+    int updatePasswordByUserName(@Param("username")String username,@Param("password")String password);
+
+    int checkPassword(@Param("password")String password,@Param("userId")Integer userId);
+
+    int checkEmailByUserId(@Param("email")String email,@Param("userId")Integer userId);
 }
