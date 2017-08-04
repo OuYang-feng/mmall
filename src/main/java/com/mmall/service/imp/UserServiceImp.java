@@ -26,8 +26,6 @@ public class UserServiceImp implements IUserService {
         if(resultCount == 0){
             return ServerResponse.createByErrorMessage("用户名不存在");
         }
-
-        // todo 密码登录MD5
         String md5Password = MD5Util.MD5EncodeUtf8(password);
         User user = userMapper.selectLogin(username,md5Password);
         if(user == null){
@@ -162,5 +160,16 @@ public class UserServiceImp implements IUserService {
         }
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
+    }
+
+    //backend
+    /*
+        校验是否是管理员
+     */
+    public ServerResponse checkAdminRole(User user){
+        if (user!=null&&user.getRole().intValue() == Const.Role.ROLE_ADMIN){
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }
