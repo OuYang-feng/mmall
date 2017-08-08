@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 
@@ -38,17 +37,17 @@ public class UserServiceImp implements IUserService {
 
     public ServerResponse<String> register(User user){
 
-        ServerResponse validResponse = this.checkValid(user.getUsername(), com.mmall.common.Const.USERNAME);
+        ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
         if (!validResponse.isSuccess()){
             return validResponse;
         }
 
-        validResponse = this.checkValid(user.getEmail(), com.mmall.common.Const.EMAIL);
+        validResponse = this.checkValid(user.getEmail(), Const.EMAIL);
 
         if (!validResponse.isSuccess()){
             return validResponse;
         }
-        user.setRole(com.mmall.common.Const.Role.ROLE_CUSTOMER);
+        user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5加密
 
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
@@ -74,7 +73,7 @@ public class UserServiceImp implements IUserService {
     }
 
    public ServerResponse selectQuestion(String username){
-        ServerResponse validResponse = this.checkValid(username,Const.USERNAME);
+        ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
         if (validResponse.isSuccess()){
             return ServerResponse.createByErrorMessage("用户不存在");
         }
