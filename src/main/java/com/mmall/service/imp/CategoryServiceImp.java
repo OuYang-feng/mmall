@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 @Service("iCategoryService")
-public class ICategoryServiceImp implements ICategoryService {
+public class CategoryServiceImp implements ICategoryService {
 
-    private Logger logger = LoggerFactory.getLogger(ICategoryServiceImp.class);
+    private Logger logger = LoggerFactory.getLogger(CategoryServiceImp.class);
 
     @Autowired
     private CategoryMapper categoryMapper;
@@ -67,7 +67,7 @@ public class ICategoryServiceImp implements ICategoryService {
     /*
         递归查询节点的ｉｄ和孩子节点的ｉｄ
      */
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId){
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId){
         Set<Category> categorySet = Sets.newHashSet();
         findChildrenCategory(categorySet,categoryId);
         List<Integer> categoryIdList = Lists.newArrayList();
