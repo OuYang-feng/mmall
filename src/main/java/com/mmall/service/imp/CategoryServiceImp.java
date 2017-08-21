@@ -57,7 +57,7 @@ public class CategoryServiceImp implements ICategoryService {
     }
 
     public ServerResponse<List<Category>> getChildrenParallerCategory(Integer categoryId){
-        List<Category> categoryList = categoryMapper.selecCategoryChildrenByParentId(categoryId);
+        List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         if (CollectionUtils.isEmpty(categoryList)){
             logger.info("未找到当前分类的子分类");
         }
@@ -86,7 +86,7 @@ public class CategoryServiceImp implements ICategoryService {
         }
         //查找子节点，递归算法一定要有一个退出条件
         //当categoryList为空的时候停止递归查询
-        List<Category> categoryList = categoryMapper.selecCategoryChildrenByParentId(categoryId);
+        List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         for (Category categoryItem : categoryList){
             findChildrenCategory(categorySet,categoryItem.getId());
         }

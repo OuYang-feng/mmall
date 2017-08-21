@@ -198,7 +198,7 @@ public class ProductServiceImp implements IProductService {
             }
         }
 
-        List<Product> productList = productMapper.selectByNameAndCategoryId(StringUtils.isBlank(keyword)?null:keyword,categoryIdList.size()==0?null:categoryIdList);
+        List<Product> productList = productMapper.selectByNameAndCategoryIds(StringUtils.isBlank(keyword)?null:keyword,categoryIdList.size()==0?null:categoryIdList);
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for (Product product:productList){
             ProductListVo productListVo = assembleProductListVo(product);
